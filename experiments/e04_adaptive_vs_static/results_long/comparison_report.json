@@ -1,0 +1,168 @@
+{
+  "parameters": {
+    "n_replications": 5,
+    "duration_s": 86400,
+    "warmup_s": 3600,
+    "phase_schedule": "COMPUTE(6h)\u2192CHECKPOINT(2h)\u2192RECALL(4h)\u2192COMPUTE(6h)\u2192CHECKPOINT(2h)\u2192IDLE(4h)"
+  },
+  "static": {
+    "raw_results": [
+      {
+        "rep_id": 0,
+        "n_migrations": 7872,
+        "n_recalls": 18837,
+        "n_mounts": 8,
+        "bytes_archived": 3356648984252,
+        "bytes_recalled": 0,
+        "bytes_written": 1725558742532,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 1,
+        "n_migrations": 7978,
+        "n_recalls": 18740,
+        "n_mounts": 8,
+        "bytes_archived": 3500314984336,
+        "bytes_recalled": 0,
+        "bytes_written": 1866851698639,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 2,
+        "n_migrations": 8168,
+        "n_recalls": 18844,
+        "n_mounts": 8,
+        "bytes_archived": 3399863684158,
+        "bytes_recalled": 0,
+        "bytes_written": 1774533052119,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 3,
+        "n_migrations": 8028,
+        "n_recalls": 18598,
+        "n_mounts": 8,
+        "bytes_archived": 3959042658960,
+        "bytes_recalled": 0,
+        "bytes_written": 2049824922651,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 4,
+        "n_migrations": 7872,
+        "n_recalls": 18882,
+        "n_mounts": 8,
+        "bytes_archived": 2834537462406,
+        "bytes_recalled": 0,
+        "bytes_written": 1474293432103,
+        "cache_hit_rate": 1.0
+      }
+    ],
+    "summary": {
+      "n_migrations": {
+        "mean": 7983.6,
+        "std": 123.40502420890326,
+        "ci_half": 108.16927297527702
+      },
+      "n_recalls": {
+        "mean": 18780.2,
+        "std": 114.53471089586772
+      },
+      "n_mounts": {
+        "mean": 8.0,
+        "std": 0.0,
+        "ci_half": 0.0
+      },
+      "bytes_archived": {
+        "mean": 3410081554822.4,
+        "std": 401157952822.7789
+      },
+      "bytes_written": {
+        "mean": 1778212369608.8,
+        "std": 210227835940.68472
+      }
+    }
+  },
+  "adaptive": {
+    "raw_results": [
+      {
+        "rep_id": 0,
+        "n_migrations": 8044,
+        "n_recalls": 18802,
+        "n_mounts": 6,
+        "bytes_archived": 3746975239212,
+        "bytes_recalled": 0,
+        "bytes_written": 1877077672586,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 1,
+        "n_migrations": 8214,
+        "n_recalls": 18624,
+        "n_mounts": 3,
+        "bytes_archived": 3950308336680,
+        "bytes_recalled": 0,
+        "bytes_written": 1992198184947,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 2,
+        "n_migrations": 8011,
+        "n_recalls": 18772,
+        "n_mounts": 6,
+        "bytes_archived": 5271622032786,
+        "bytes_recalled": 0,
+        "bytes_written": 2641737637782,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 3,
+        "n_migrations": 8279,
+        "n_recalls": 19122,
+        "n_mounts": 7,
+        "bytes_archived": 3334669442692,
+        "bytes_recalled": 0,
+        "bytes_written": 1759918002682,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 4,
+        "n_migrations": 8111,
+        "n_recalls": 18945,
+        "n_mounts": 6,
+        "bytes_archived": 4165147333464,
+        "bytes_recalled": 0,
+        "bytes_written": 2088942269627,
+        "cache_hit_rate": 1.0
+      }
+    ],
+    "summary": {
+      "n_migrations": {
+        "mean": 8131.8,
+        "std": 113.0915558297789,
+        "ci_half": 99.12911935450651
+      },
+      "n_recalls": {
+        "mean": 18853.0,
+        "std": 188.69817169225567
+      },
+      "n_mounts": {
+        "mean": 5.6,
+        "std": 1.51657508881031,
+        "ci_half": 1.3293366766925523
+      },
+      "bytes_archived": {
+        "mean": 4093744476966.8,
+        "std": 726207897690.3379
+      },
+      "bytes_written": {
+        "mean": 2071974753524.8,
+        "std": 341557546278.38367
+      }
+    }
+  },
+  "comparison": {
+    "migrations_diff_pct": 1.8563054261235508,
+    "mounts_diff_pct": -30.000000000000004
+  }
+}

@@ -1,0 +1,3 @@
+policy,n_migrations_mean,n_migrations_ci,n_mounts_mean,n_mounts_ci,mean_recall_latency_s_mean,mean_recall_latency_s_ci,p95_recall_latency_s_mean,cache_hit_rate_mean
+static,0.0,0.0,0.0,0.0,2.776,0.073,8.696,1.000
+adaptive,0.0,0.0,0.0,0.0,2.748,0.083,8.674,1.000

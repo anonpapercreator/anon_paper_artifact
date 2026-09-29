@@ -1,0 +1,15 @@
+import pandas as pd, numpy as np, pickle
+T0=pd.Timestamp('2026-08-28').timestamp(); T1=pd.Timestamp('2026-09-27').timestamp()
+L=pd.read_parquet('lifecycles.parquet')
+c=pd.read_parquet('audit.parquet',columns=['t','ev','key','prefix','ext'])
+c=c[(c.ev=='CREATE')&(c.t>=T0)&(c.t<T1)]
+c['key']=np.array([int(k,16) for k in c.key],dtype=np.uint64)
+L=L.merge(c[['key','t','prefix','ext']].rename(columns={'t':'tc'}),on=['key','tc'],how='left')
+print("prefix missing:",L.prefix.isna().mean())
+L.to_parquet('lifecycles_p.parquet')
+bp=L.groupby('prefix').bytes.sum().sort_values(ascending=False)
+print("projects:",len(bp)," top-1/5/10 byte share:",[round(bp.iloc[:k].sum()/bp.sum(),3) for k in (1,5,10)])
+dp=L[L.status!='censored'].groupby('prefix').bytes.sum().sort_values(ascending=False)
+print("dying bytes: top-1/5/10 share:",[round(dp.iloc[:k].sum()/dp.sum(),3) for k in (1,5,10)])
+print("largest single files TB:",(L.bytes.nlargest(5)/1e12).round(2).tolist())
+print("top ext by bytes:",(L.groupby('ext').bytes.sum().nlargest(8)/1e12).round(1).to_dict())

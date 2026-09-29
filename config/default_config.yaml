@@ -1,0 +1,263 @@
+# DMF 7 Discrete Event Simulator — Default Configuration
+# All times in seconds unless explicitly noted.
+# All sizes in bytes unless explicitly noted.
+# This file maps directly to HPE DMF 7 configurable parameters where applicable.
+
+simulation:
+  seed: 42                        # Master RNG seed (integer)
+  n_replications: 30              # Number of independent replications
+  sim_duration_s: 14400           # Simulated duration per replication (s) [4 hours default]
+  warmup_s: 1800                  # Warm-up period hint for Welch's method (s)
+  time_unit: seconds              # Internal time unit (do not change)
+  output_dir: ./results
+  output_format: jsonl            # 'jsonl' or 'csv'
+  verbose: false
+  trace_interval_s: 60            # How often to sample queue depths / utilisation
+
+# ---------------------------------------------------------------------------
+# Disk Cache Tier
+# Models the Lustre / HPE XFS filesystem disk layer
+# ---------------------------------------------------------------------------
+disk_cache:
+  capacity_bytes: 977465837092864    # 889 TiB real p4_ls scratch tier
+  hwm_fraction: 0.80              # Free-space TRIGGER high-water mark (independent of migration)
+  lwm_fraction: 0.60              # Free-space trigger releases DUL->OFL down to here
+  initial_fill_fraction: 0.50     # Starting fill level (fraction)
+
+  # G/G/1 disk I/O service time model
+  # Service times drawn from LogNormal(mu_s, sigma_s) in seconds
+  # These represent the time to stage one file's data to/from the disk tier
+  # CALIBRATED against DMF 7 trace (2025-04-26): KS≈0.34 for recall latency
+  # Fast component (disk hit): base ~0.5s + size-dependent transfer
+  io_service_time_lognormal_mu_s: 0.5     # Calibrated; ~1.65s median base
+  io_service_time_lognormal_sigma_s: 1.0
+
+  # Aggregate disk throughput (GiB/s) for size-dependent service times.
+  # Service time includes a deterministic component: size_bytes / aggregate_bw.
+  aggregate_throughput_gib_s: 65.0   # ESS 3500 aggregate (calibrated)
+
+  max_concurrent_io: 128          # Maximum concurrent disk I/O operations (buffer depth)
+  metadata_lookup_latency_s: 0.005 # Cassandra metadata lookup (fixed latency model)
+
+# ---------------------------------------------------------------------------
+# SAN / Interconnect
+# Models InfiniBand or 100GbE between filesystem nodes and DMF movers
+# ---------------------------------------------------------------------------
+interconnect:
+  bandwidth_bytes_per_s: 10737418240  # 10 GB/s (80 Gbit/s InfiniBand HDR approx)
+  fixed_latency_s: 0.0001             # ~100 microseconds base latency
+  max_concurrent_transfers: 64        # Concurrency limit on the interconnect
+
+# ---------------------------------------------------------------------------
+# DMF Data Movers
+# HPE DMF 7 supports multiple parallel mover nodes
+# Maps to: NODE_BANDWIDTH, HBA_BANDWIDTH, BANDWIDTH_MULTIPLIER
+# ---------------------------------------------------------------------------
+data_movers:
+  n_movers: 4                          # Number of mover nodes (typical: 4–6)
+  node_bandwidth_bytes_per_s: 2684354560  # 2.5 GB/s per node (NODE_BANDWIDTH)
+  hba_bandwidth_bytes_per_s: 1610612736   # 1.5 GB/s per HBA (HBA_BANDWIDTH)
+  bandwidth_multiplier: 2.0             # Compression factor (BANDWIDTH_MULTIPLIER)
+  mover_overhead_s: 0.050              # Per-file mover scheduling overhead (fixed)
+
+  # Trickle migration (DMMIGRATE_TRICKLE)
+  trickle_enabled: false
+  dmmigrate_unack: 16                  # Max unacknowledged concurrent migrations
+
+# ---------------------------------------------------------------------------
+# OpenVault Library Controller
+# Adds scheduling latency above the hardware robot
+# ---------------------------------------------------------------------------
+openvault:
+  scheduling_latency_s: 1.0            # Fixed overhead per mount/unmount request
+
+# ---------------------------------------------------------------------------
+# Tape Robot
+# Models the robotic arm in the tape library
+# ---------------------------------------------------------------------------
+tape_robot:
+  n_arms: 1                            # 1 for standard, 2 for Spectra TFinity dual-robot
+  library_slots: 500                   # Total cartridge slots in library
+  n_drives: 9                          # Usable drives (11 physical - 2 reserved for media validation)
+
+  # Robot arm travel model
+  arm_horizontal_speed_m_per_s: 1.5   # Horizontal arm travel speed
+  arm_vertical_speed_m_per_s: 0.8     # Vertical arm travel speed
+  library_height_m: 2.0               # Physical library height (for travel time calc)
+  library_width_m: 1.5                # Physical library width
+
+  # Cartridge handling times (linear-space mean and std in seconds).
+  # Converted internally to LogNormal(μ_log, σ_log) via core.rng.lognormal_params_from_mean_std.
+  # CALIBRATED against DMF 7 trace (2025-04-26): robot cartridge load tuned to match
+  # observed recall latency bimodal distribution (fast disk hit vs slow tape mount).
+  # Fast component ~65% (disk), warm ~9% (mounted tape), cold ~26% (robot mount).
+  cartridge_load_s_mu: 0.8            # Calibrated from trace; ~0.8s mean (was 15s)
+  cartridge_load_s_sigma: 0.12       # Calibrated: 15% CV
+  cartridge_unload_s_mu: 0.6         # Calibrated from trace
+  cartridge_unload_s_sigma: 0.09
+
+# ---------------------------------------------------------------------------
+# Tape Drives
+# Models individual LTO or Enterprise tape drives
+# ---------------------------------------------------------------------------
+tape_drives:
+  n_drives: 9                          # Must match tape_robot.n_drives (9 usable)
+  drive_type: TS1160                   # IBM TS1160 in TS4500 (p4_ls)
+  n_write_drives: 7                    # 9 drives serve recalls; 7 of them also serve writes
+
+  # Transfer rates (bytes/s)
+  native_rate_bytes_per_s: 419430400  # 400 MiB/s native (TS1160)
+  compressed_rate_bytes_per_s: 419430400  # = native: site data is uncompressible
+
+  # Mount time distribution: LogNormal(mu, sigma)
+  # Includes: robot load + tape thread + BOT seek
+  mount_time_lognormal_mu_s: 3.689    # ln(40) => ~40s median mount time
+  mount_time_lognormal_sigma_s: 0.3
+
+  # Unload/dismount time
+  unload_time_lognormal_mu_s: 3.258   # ln(26) => ~26s median
+  unload_time_lognormal_sigma_s: 0.25
+
+  # Tape seek model (block ID positioning, per LTO-8 spec)
+  # t_seek(delta_pos) = delta_pos_fraction × tape_length_s × seek_speed_factor
+  tape_capacity_bytes: 20000000000000 # 20 TB native (TS1160 JE)
+  seek_speed_factor: 1.0              # Overhead multiplier on tape-traversal term (1.0 = nominal)
+  # Length-based locate model (IBM 3592/TS1160 published specs; exact locate-seconds
+  # are not published, so these are stated assumptions):
+  #   distance_m = |delta_bytes| / (tape_capacity_bytes / tape_length_m)
+  #   seek_time  = locate_base_s + distance_m / search_speed_m_s * seek_speed_factor
+  tape_length_m: 1140.0               # ~1140 m of tape per 3592 JE cartridge
+  search_speed_m_s: 10.0              # high-speed search (enterprise 3592 class)
+  locate_base_s: 8.0                  # load-to-ready / settle overhead
+
+  # Compression ratio: LogNormal(mu, sigma)
+  compression_ratio_lognormal_mu: 0.0     # uncompressible data: ratio fixed at 1.0
+  compression_ratio_lognormal_sigma: 0.0  # uncompressible data: no variance
+
+  # Drive cleaning (periodic unavailability)
+  cleaning_interval_mounts: 500       # Cleaning after N mounts
+  cleaning_duration_s: 300            # 5 minutes offline for cleaning
+
+# ---------------------------------------------------------------------------
+# Volume Groups (VGs)
+# DMF 7 organises tape volumes into Volume Groups (VGs)
+# ---------------------------------------------------------------------------
+volume_groups:
+  - name: p4_ls                        # Single TS4500/TS1160 library (p4_ls)
+    n_volumes: 3040                    # Real cartridge count per library (TS1160 JE)
+    drives_assigned: [0, 1, 2, 3, 4, 5, 6, 7, 8]  # all 9 drives serve this VG (read pool)
+    volume_capacity_bytes: 20000000000000  # 20 TB native per cartridge
+    allocation_strategy: sequential
+
+
+library_server:
+  ls_min_batch_bytes: 10737418240     # 10 GB minimum batch before mount (LS_MIN_BATCH)
+  ls_max_wait_s: 300                  # Max wait before flushing regardless of batch size
+  recall_priority_classes:
+    - name: interactive
+      priority: 10                    # Higher = served first
+      sources: [filesystem_read]      # Triggered by transparent read() of offline file
+    - name: batch
+      priority: 5
+      sources: [dmget, api]
+
+# ---------------------------------------------------------------------------
+# DMF Policy Engine
+# Maps to DMF 7 policy configuration parameters
+# ---------------------------------------------------------------------------
+policy_engine:
+  cycle_period_s: 21600               # Migration runs every 6 h, measured from previous START
+  candidate_age_threshold_s: 1800     # Files older than 30 min are migration candidates
+  migration_priority: size_descending # 'size_descending' | 'age_descending' | 'combined'
+  space_release_on_migration: false   # If true: REG→MIG→OFL (no DUL state); if false: REG→MIG→DUL
+  dual_copy: false                     # Single copy at this library (other copies on s4_ls + ZeroWatt)
+  n_policy_workers: 4                 # Parallel policy execution threads
+
+  # Recall priority
+  recall_sort: tape_order             # 'tape_order' (DMF 7 default) | 'fifo' | 'priority'
+
+# ---------------------------------------------------------------------------
+# Workload Generator
+# Statistical parameters for synthetic workload generation
+# ---------------------------------------------------------------------------
+workload:
+  mode: synthetic                     # 'synthetic' | 'trace_replay'
+  trace_file: null                    # Path to DMF trace file (for trace_replay mode)
+
+  # File size distribution: LogNormal(mu, sigma) in bytes
+  file_size_lognormal_mu: 16.118      # ln(10 MiB) = ln(10485760) ≈ 16.165
+  file_size_lognormal_sigma: 2.5      # Heavy right tail (HPC workload empirical)
+  file_size_min_bytes: 4096           # Minimum file size (one block)
+  file_size_max_bytes: 1099511627776  # 1 TiB maximum file size
+
+  # Inter-arrival time distribution
+  iat_distribution: pareto            # 'pareto' (self-similar) | 'exponential' (M/M/1 validation)
+  iat_pareto_alpha: 1.8               # Shape parameter (α > 1 ensures finite mean)
+  iat_pareto_xmin_s: 0.5              # Minimum IAT (x_min), controls load intensity
+  iat_exponential_rate: 0.5           # λ for exponential IAT (Poisson arrivals)
+
+  # Access frequency: Zipf distribution
+  working_set_size: 10000             # Number of distinct files in working set
+  zipf_s: 1.0                         # Zipf exponent (higher = more skewed)
+
+  # Read/write ratio
+  read_fraction: 0.70                 # P(operation = READ)
+
+  # Diurnal modulation
+  diurnal_enabled: true
+  diurnal_amplitude: 0.6              # Peak-trough amplitude factor
+  diurnal_peak_hour: 10               # Hour of peak activity (0–23)
+
+  # File age at creation (existing working set pre-populated)
+  initial_file_age_s_mu: 7200         # Mean initial file age: 2 hours
+  initial_file_age_s_sigma: 3600      # Std dev: 1 hour
+
+  # Trace replay calibration parameters (used only when mode = trace_replay)
+  # CALIBRATED against DMF 7 trace (2025-04-26): KS≈0.34 for recall latency
+  trace_offline_fraction: 0.30         # Fraction of RECALL files that are offline (OFL)
+                                      # ~30% require tape mount (fast disk ~65%, warm ~5%)
+  trace_warm_fraction: 0.20            # Fraction of offline files with pre-mounted tape
+
+  # ─────────────────────────────────────────────────────────────────────
+  # Multi-tenant noisy-neighbour workload (see workload/multi_tenant.py)
+  # ─────────────────────────────────────────────────────────────────────
+  # Real DMF deployments serve hundreds-thousands of concurrent tenants.
+  # Set ``enabled: true`` to replace the single-stream generator with N
+  # independent tenant streams (background, power-user, noisy-neighbour),
+  # parameterised so the long-run aggregate file-arrival rate matches the
+  # single-stream config above. The single dial that controls how the
+  # mix is heterogeneous is ``noise_level`` ∈ [0, 1]:
+  #   0   = homogeneous farm (same aggregate behaviour as single-stream)
+  #   1   = high heterogeneity, max noisy-neighbour fraction, max σ
+  multi_tenant:
+    enabled: false
+    n_tenants: 256                     # number of concurrent tenants
+    noise_level: 0.5                   # heterogeneity dial β ∈ [0,1]
+    aggregate_lambda_files_per_s: null # null = derive from single-stream cfg
+    rate_lognormal_sigma_max: 1.5      # max σ of the per-tenant rate LogNormal at β=1
+    size_perturbation_sigma_max: 0.5   # max σ of the per-tenant LogNormal-μ jitter
+    power_user_fraction: 0.05          # fraction of tenants that are power users
+    noisy_fraction_max: 0.10           # fraction noisy-neighbour at β=1 (linearly scaled by β)
+    noisy_burst_period_s: 600          # mean inter-burst gap for noisy tenants (s)
+    noisy_burst_size: 50               # files per burst
+
+# ---------------------------------------------------------------------------
+# Adaptive Policy Advisor
+# Closes the loop between MMFQ/IOM/CTMC computational models and the DES.
+# Dynamically adjusts migration age threshold, cycle period, and LS batch
+# sizing based on predicted workload phases and cache-fill dynamics.
+# ---------------------------------------------------------------------------
+adaptive_policy:
+  enabled: true
+  advisor_interval_s: 60              # How often the advisor recomputes policy
+  tau_min_s: 300                      # Minimum age threshold (5 minutes)
+  tau_max_s: 86400                    # Maximum age threshold (24 hours)
+  baseline_age_threshold_s: 1800      # Fallback when insufficient telemetry
+  clamp_factor_min: 0.25              # tau_star >= baseline * 0.25
+  clamp_factor_max: 4.0               # tau_star <= baseline * 4.0
+  checkpoint_horizon_s: 600           # Look-ahead horizon for CHECKPOINT prediction
+  checkpoint_threshold_prob: 0.3      # Trigger emergency mode if P(CHECKPOINT) > 0.3
+  emergency_age_threshold_s: 300       # Aggressive 5-minute migration under emergency
+  batch_size_adaptive: true            # Dynamically adjust LS batch thresholds
+  batch_size_min_bytes: 1073741824   # 1 GB
+  batch_size_max_bytes: 10737418240  # 10 GB

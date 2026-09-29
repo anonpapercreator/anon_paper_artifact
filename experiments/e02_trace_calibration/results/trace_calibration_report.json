@@ -1,0 +1,30 @@
+{
+  "trace_path": "trace.jsonl",
+  "n_observed_recalls": 11618,
+  "n_observed_migrates": 9589,
+  "ks_distance": 0.6113617214503456,
+  "diagnostics": {
+    "ks_recall": 0.3635280801816174,
+    "ks_migrate": 0.9831121833534379,
+    "n_sim_recalls": 3218.0,
+    "n_sim_migrates": 1658.0
+  },
+  "observed_breakdown": {
+    "fast_pct": 64.21931485625754,
+    "warm_pct": 20.709244276123258,
+    "cold_pct": 15.071440867619213,
+    "p50": 2.5603469610214233,
+    "p95": 29.681432569026946,
+    "p99": 46.69297138929366
+  },
+  "parameters": {
+    "mount_mu": 3.689,
+    "mount_sigma": 0.3,
+    "seek_mu": 3.5,
+    "seek_sigma": 1.0
+  },
+  "metadata": {
+    "simulator_version": "1.0.0",
+    "calibration_date": "2025-04-27"
+  }
+}

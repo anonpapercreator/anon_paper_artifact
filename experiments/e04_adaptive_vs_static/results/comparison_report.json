@@ -1,0 +1,257 @@
+{
+  "parameters": {
+    "n_replications": 10,
+    "duration_s": 3600,
+    "warmup_s": 600
+  },
+  "static": {
+    "raw_results": [
+      {
+        "rep_id": 0,
+        "n_migrations": 0,
+        "n_recalls": 557,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 53039269416,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 1,
+        "n_migrations": 0,
+        "n_recalls": 606,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 76022039000,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 2,
+        "n_migrations": 0,
+        "n_recalls": 581,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 194417057953,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 3,
+        "n_migrations": 0,
+        "n_recalls": 559,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 33613500058,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 4,
+        "n_migrations": 0,
+        "n_recalls": 577,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 46565144326,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 5,
+        "n_migrations": 0,
+        "n_recalls": 624,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 27656671489,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 6,
+        "n_migrations": 0,
+        "n_recalls": 588,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 47557655423,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 7,
+        "n_migrations": 0,
+        "n_recalls": 580,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 51960791097,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 8,
+        "n_migrations": 0,
+        "n_recalls": 587,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 41801837609,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 9,
+        "n_migrations": 0,
+        "n_recalls": 536,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 47593305834,
+        "cache_hit_rate": 1.0
+      }
+    ],
+    "summary": {
+      "n_migrations": {
+        "mean": 0.0,
+        "std": 0.0,
+        "ci_half": 0.0
+      },
+      "n_recalls": {
+        "mean": 579.5,
+        "std": 25.029982021567655
+      },
+      "n_mounts": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "bytes_archived": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    }
+  },
+  "adaptive": {
+    "raw_results": [
+      {
+        "rep_id": 0,
+        "n_migrations": 238,
+        "n_recalls": 560,
+        "n_mounts": 2,
+        "bytes_archived": 152504082232,
+        "bytes_recalled": 0,
+        "bytes_written": 80235486453,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 1,
+        "n_migrations": 218,
+        "n_recalls": 584,
+        "n_mounts": 2,
+        "bytes_archived": 53921745148,
+        "bytes_recalled": 0,
+        "bytes_written": 40765863034,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 2,
+        "n_migrations": 251,
+        "n_recalls": 542,
+        "n_mounts": 2,
+        "bytes_archived": 105657464016,
+        "bytes_recalled": 0,
+        "bytes_written": 59040736237,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 3,
+        "n_migrations": 0,
+        "n_recalls": 599,
+        "n_mounts": 0,
+        "bytes_archived": 0,
+        "bytes_recalled": 0,
+        "bytes_written": 32024228573,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 4,
+        "n_migrations": 225,
+        "n_recalls": 549,
+        "n_mounts": 2,
+        "bytes_archived": 94562946870,
+        "bytes_recalled": 0,
+        "bytes_written": 51982397282,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 5,
+        "n_migrations": 228,
+        "n_recalls": 529,
+        "n_mounts": 2,
+        "bytes_archived": 80652258104,
+        "bytes_recalled": 0,
+        "bytes_written": 44395422300,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 6,
+        "n_migrations": 260,
+        "n_recalls": 581,
+        "n_mounts": 8,
+        "bytes_archived": 60962826940,
+        "bytes_recalled": 0,
+        "bytes_written": 36672696821,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 7,
+        "n_migrations": 233,
+        "n_recalls": 603,
+        "n_mounts": 4,
+        "bytes_archived": 83806438662,
+        "bytes_recalled": 0,
+        "bytes_written": 49830601431,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 8,
+        "n_migrations": 216,
+        "n_recalls": 613,
+        "n_mounts": 2,
+        "bytes_archived": 48246216132,
+        "bytes_recalled": 0,
+        "bytes_written": 36742219456,
+        "cache_hit_rate": 1.0
+      },
+      {
+        "rep_id": 9,
+        "n_migrations": 196,
+        "n_recalls": 560,
+        "n_mounts": 2,
+        "bytes_archived": 59115731416,
+        "bytes_recalled": 0,
+        "bytes_written": 39132041199,
+        "cache_hit_rate": 1.0
+      }
+    ],
+    "summary": {
+      "n_migrations": {
+        "mean": 206.5,
+        "std": 74.7711322785888,
+        "ci_half": 46.34362792109492
+      },
+      "n_recalls": {
+        "mean": 572.0,
+        "std": 28.20953345551425
+      },
+      "n_mounts": {
+        "mean": 2.6,
+        "std": 2.118699810942761
+      },
+      "bytes_archived": {
+        "mean": 73942970952.0,
+        "std": 40362537673.60769
+      }
+    }
+  },
+  "comparison": {
+    "migrations_diff_pct": 20650.0,
+    "mounts_diff_pct": 260.0
+  }
+}

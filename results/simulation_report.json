@@ -1,0 +1,220 @@
+{
+  "kpis": {
+    "recall_latency_s": {
+      "p50": {
+        "metric": "recall_latency_p50_s",
+        "n_replications": 0,
+        "mean": NaN,
+        "std": NaN,
+        "ci95_lower": NaN,
+        "ci95_upper": NaN,
+        "half_width": NaN,
+        "ci_method": "percentile_bootstrap_B=1000"
+      },
+      "p95": {
+        "metric": "recall_latency_p95_s",
+        "n_replications": 0,
+        "mean": NaN,
+        "std": NaN,
+        "ci95_lower": NaN,
+        "ci95_upper": NaN,
+        "half_width": NaN,
+        "ci_method": "percentile_bootstrap_B=1000"
+      },
+      "p99": {
+        "metric": "recall_latency_p99_s",
+        "n_replications": 0,
+        "mean": NaN,
+        "std": NaN,
+        "ci95_lower": NaN,
+        "ci95_upper": NaN,
+        "half_width": NaN,
+        "ci_method": "percentile_bootstrap_B=1000"
+      }
+    },
+    "migrate_latency_s": {
+      "p50": {
+        "metric": "migrate_latency_p50_s",
+        "n_replications": 0,
+        "mean": NaN,
+        "std": NaN,
+        "ci95_lower": NaN,
+        "ci95_upper": NaN,
+        "half_width": NaN,
+        "ci_method": "percentile_bootstrap_B=1000"
+      },
+      "p95": {
+        "metric": "migrate_latency_p95_s",
+        "n_replications": 0,
+        "mean": NaN,
+        "std": NaN,
+        "ci95_lower": NaN,
+        "ci95_upper": NaN,
+        "half_width": NaN,
+        "ci_method": "percentile_bootstrap_B=1000"
+      }
+    },
+    "cache_hit_rate": {
+      "metric": "cache_hit_rate",
+      "n_replications": 1,
+      "mean": NaN,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "n_migrations": {
+      "metric": "n_migrations",
+      "n_replications": 1,
+      "mean": 0.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "n_recalls": {
+      "metric": "n_recalls",
+      "n_replications": 1,
+      "mean": 0.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "n_tape_mounts": {
+      "metric": "n_mounts",
+      "n_replications": 1,
+      "mean": 0.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "n_seeks": {
+      "metric": "n_seeks",
+      "n_replications": 1,
+      "mean": 0.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "bytes_archived": {
+      "metric": "bytes_archived",
+      "n_replications": 1,
+      "mean": 0.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "bytes_recalled": {
+      "metric": "bytes_recalled",
+      "n_replications": 1,
+      "mean": 0.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "bytes_written_to_cache": {
+      "metric": "bytes_written_to_cache",
+      "n_replications": 1,
+      "mean": 12528815787.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "bytes_read_from_cache": {
+      "metric": "bytes_read_from_cache",
+      "n_replications": 1,
+      "mean": 54218056608.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "write_operations": {
+      "metric": "write_operations",
+      "n_replications": 1,
+      "mean": 56.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "read_operations": {
+      "metric": "read_operations",
+      "n_replications": 1,
+      "mean": 132.0,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    },
+    "mean_disk_usage_pct": {
+      "metric": "mean_disk_usage_pct",
+      "n_replications": 0,
+      "mean": NaN,
+      "std": NaN,
+      "ci95_lower": NaN,
+      "ci95_upper": NaN,
+      "half_width": NaN,
+      "ci_method": "percentile_bootstrap_B=1000"
+    }
+  },
+  "littles_law_validation": {
+    "disk_cache": {
+      "pass_rate": 0.0,
+      "n_replications": 1
+    },
+    "interconnect": {
+      "pass_rate": 0.0,
+      "n_replications": 1
+    },
+    "mover_pool": {
+      "pass_rate": 0.0,
+      "n_replications": 1
+    },
+    "robot": {
+      "pass_rate": 0.0,
+      "n_replications": 1
+    },
+    "drive_pool": {
+      "pass_rate": 0.0,
+      "n_replications": 1
+    },
+    "ls_accrual": {
+      "pass_rate": 0.0,
+      "n_replications": 1
+    },
+    "recall_queue": {
+      "pass_rate": 0.0,
+      "n_replications": 1
+    }
+  },
+  "metadata": {
+    "config_file": "config/default_config.yaml",
+    "n_replications": 1,
+    "n_successful": 1,
+    "failed_replications": [],
+    "partial_run": false,
+    "master_seed": 42,
+    "sim_duration_s": 300.0,
+    "wall_time_s": 0.16,
+    "simulator_version": "1.0.0",
+    "target_system": "HPE DMF 7"
+  }
+}

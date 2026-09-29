@@ -1,0 +1,145 @@
+{
+  "project": "DESCASSI — SC 2026 Reproducibility Manifest",
+  "date": "2026-04-27",
+  "experiments": [
+    {
+      "id": "E1",
+      "name": "M/M/1 Analytical Baseline",
+      "purpose": "Verify queueing mechanics against closed-form M/M/1",
+      "command": "python3 experiments/e01_mm1_baseline/run_mm1.py --lambda 0.8 --mu 1.0 --replications 30 --duration 3600 --warmup 600 --seed 42",
+      "outputs": [
+        "experiments/e01_mm1_baseline/results/mm1_report.json",
+        "experiments/e01_mm1_baseline/results/mm1_replications.csv"
+      ],
+      "key_results": {
+        "theoretical_Wq": 4.0,
+        "simulated_Wq_mean": 4.169,
+        "Wq_error_pct": 4.22,
+        "Wq_ci95_halfwidth": 0.390,
+        "n_replications": 30
+      }
+    },
+    {
+      "id": "E2",
+      "name": "Trace Calibration Validation",
+      "purpose": "Validate calibrated parameters against production DMF 7 trace",
+      "command": "python3 experiments/e02_trace_calibration/extract_simulated_cdf.py trace.jsonl",
+      "outputs": [
+        "experiments/e02_trace_calibration/results/cdf_comparison.csv",
+        "experiments/e02_trace_calibration/results/calibration_report.json",
+        "experiments/e02_trace_calibration/results/simulated_recalls.json"
+      ],
+      "key_results": {
+        "trace_events": 42438,
+        "trace_duration_h": 16.6,
+        "n_observed_recalls": 11618,
+        "n_simulated_recalls": 3218,
+        "ks_distance": 0.3635,
+        "sim_fast_pct": 65.5,
+        "obs_fast_pct": 64.2,
+        "sim_p50": 2.62,
+        "obs_p50": 2.56
+      }
+    },
+    {
+      "id": "E3",
+      "name": "Policy Sweep (tau*)",
+      "purpose": "Demonstrate existence of finite optimal archive interval",
+      "command": "python3 experiments/e03_policy_sweep/run_long.py",
+      "outputs": [
+        "experiments/e03_policy_sweep/results_long/sweep_data.csv",
+        "experiments/e03_policy_sweep/results_long/sweep_report.json"
+      ],
+      "key_results": {
+        "tau_values": [100, 300, 600, 1200, 1800, 3600, 7200, 14400, 28800, 43200, 57600, 86400],
+        "n_replications_per_tau": 5,
+        "duration_s": 43200,
+        "optimal_tau_star_s": 3600,
+        "weights": {"wp": 1.0, "wm": 0.5, "wr": 0.8}
+      }
+    },
+    {
+      "id": "E4",
+      "name": "Phase-Adaptive vs Static (24h)",
+      "purpose": "Compare CTMC-driven adaptive policy against static threshold over long duration",
+      "command": "python3 experiments/e04_adaptive_vs_static/run_long.py",
+      "outputs": [
+        "experiments/e04_adaptive_vs_static/results_long/comparison_report.json",
+        "experiments/e04_adaptive_vs_static/results_long/comparison_summary.csv"
+      ],
+      "key_results": {
+        "n_replications": 5,
+        "duration_s": 86400,
+        "static_migrations_mean": 8247,
+        "static_mounts_mean": 8.8,
+        "adaptive_migrations_mean": 8019,
+        "adaptive_mounts_mean": 6.2
+      }
+    },
+    {
+      "id": "E5",
+      "name": "SOTA Comparison: IOR-like Benchmark",
+      "purpose": "Replicate SmartIO-style IOR benchmark conditions to show static/adaptive parity on regular workloads",
+      "command": "python3 experiments/e05_sota_ior/run_ior_comparison.py",
+      "outputs": [
+        "experiments/e05_sota_ior/results/comparison_report.json",
+        "experiments/e05_sota_ior/results/comparison_summary.csv"
+      ],
+      "key_results": {
+        "n_replications": 10,
+        "duration_s": 7200,
+        "workload": "IOR-like: uniform 1MiB, regular IAT, 80% write",
+        "static_mean_latency_s": 2.78,
+        "adaptive_mean_latency_s": 2.75,
+        "static_mounts_mean": 0,
+        "adaptive_mounts_mean": 0
+      }
+    },
+    {
+      "id": "E6",
+      "name": "SOTA Comparison: FLASH-like Phase-Changing Workload",
+      "purpose": "Show adaptive policy advantage on realistic phase-changing workloads",
+      "command": "python3 experiments/e06_sota_flash/run_flash_comparison.py",
+      "outputs": [
+        "experiments/e06_sota_flash/results/comparison_report.json",
+        "experiments/e06_sota_flash/results/comparison_summary.csv"
+      ],
+      "key_results": {
+        "n_replications": 5,
+        "duration_s": 43200,
+        "workload": "FLASH-like: INIT→EVOLVE→CHECKPOINT→ANALYSIS→EVOLVE→IDLE",
+        "static_mean_latency_s": 2.77,
+        "adaptive_mean_latency_s": 2.72,
+        "static_mounts_mean": 7.6,
+        "adaptive_mounts_mean": 0,
+        "mounts_reduction_pct": -100.0
+      }
+    }
+  ],
+  "figures": [
+    {
+      "label": "fig:mmfq",
+      "data": "experiments/figures/mmfq_density.csv",
+      "generator": "python3 experiments/figures/generate_mmfq.py"
+    },
+    {
+      "label": "fig:cdf",
+      "data": "experiments/e02_trace_calibration/results/cdf_comparison.csv",
+      "generator": "python3 experiments/e02_trace_calibration/extract_simulated_cdf.py trace.jsonl"
+    },
+    {
+      "label": "fig:sweep",
+      "data": "experiments/e03_policy_sweep/results_long/sweep_data.csv",
+      "generator": "python3 experiments/e03_policy_sweep/run_long.py"
+    }
+  ],
+  "compilation": {
+    "command_chain": [
+      "pdflatex main.tex",
+      "bibtex main",
+      "pdflatex main.tex",
+      "pdflatex main.tex"
+    ],
+    "note": "IEEEtran requires 4-step compile for bibliography resolution. See paper_sc2026/README_COMPILE.md."
+  }
+}

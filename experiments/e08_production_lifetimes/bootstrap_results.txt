@@ -1,0 +1,11 @@
+C/rho count prod           [0.8426 0.8926 0.9315]
+C/rho bytes prod           [0.923  0.9633 0.983 ]
+V/rho h bytes prod         [3.3172 3.4051 3.4531]
+V/rho h bytes a=30m p=0    [0.4908 0.4959 0.4979]
+S_bytes(1d)                [0.8088 0.9047 0.9626]
+S_bytes(28d)               [0.4374 0.7259 0.9217]
+S_count(1d)                [0.7841 0.8466 0.9066]
+S_count(28d)               [0.7585 0.8286 0.8933]
+drop top-1: C/rho prod 0.9543  S(1d) 0.8802  S(28d) 0.7000  TB 107.2
+drop top-5: C/rho prod 0.9275  S(1d) 0.8807  S(28d) 0.8642  TB 45.7
+drop top-10: C/rho prod 0.9658  S(1d) 0.9495  S(28d) 0.9315  TB 37.8

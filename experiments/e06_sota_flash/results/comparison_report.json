@@ -1,0 +1,194 @@
+{
+  "parameters": {
+    "n_replications": 5,
+    "duration_s": 43200,
+    "warmup_s": 3600,
+    "workload_description": "FLASH-like: INIT(1h)\u2192EVOLVE(3h)\u2192CHECKPOINT(1h)\u2192ANALYSIS(1h)\u2192EVOLVE(3h)\u2192IDLE(3h)"
+  },
+  "static": {
+    "raw_results": [
+      {
+        "rep_id": 0,
+        "n_migrations": 2803,
+        "n_recalls": 3809,
+        "n_mounts": 7,
+        "mean_recall_latency_s": 2.7880058886175827,
+        "p95_recall_latency_s": 8.819691048442472,
+        "p99_recall_latency_s": 16.948216179337763,
+        "cache_hit_rate": 0.9997375328083989,
+        "bytes_archived": 9363421335082,
+        "bytes_written": 14376269350683
+      },
+      {
+        "rep_id": 1,
+        "n_migrations": 5512,
+        "n_recalls": 3902,
+        "n_mounts": 8,
+        "mean_recall_latency_s": 2.834523381125365,
+        "p95_recall_latency_s": 8.86129244934982,
+        "p99_recall_latency_s": 17.29790316109421,
+        "cache_hit_rate": 0.9997437868306431,
+        "bytes_archived": 17156911042386,
+        "bytes_written": 14346143813053
+      },
+      {
+        "rep_id": 2,
+        "n_migrations": 3899,
+        "n_recalls": 3785,
+        "n_mounts": 8,
+        "mean_recall_latency_s": 2.729797387744762,
+        "p95_recall_latency_s": 8.544693170969547,
+        "p99_recall_latency_s": 15.647551688168592,
+        "cache_hit_rate": 1.0,
+        "bytes_archived": 12588627477763,
+        "bytes_written": 14711669872464
+      },
+      {
+        "rep_id": 3,
+        "n_migrations": 2807,
+        "n_recalls": 3801,
+        "n_mounts": 7,
+        "mean_recall_latency_s": 2.749586660646306,
+        "p95_recall_latency_s": 8.824417450923647,
+        "p99_recall_latency_s": 17.74277902067115,
+        "cache_hit_rate": 1.0,
+        "bytes_archived": 8917277473110,
+        "bytes_written": 14527591311725
+      },
+      {
+        "rep_id": 4,
+        "n_migrations": 5737,
+        "n_recalls": 3788,
+        "n_mounts": 8,
+        "mean_recall_latency_s": 2.7486097380910643,
+        "p95_recall_latency_s": 8.384784541645185,
+        "p99_recall_latency_s": 15.858645631352124,
+        "cache_hit_rate": 0.9997360084477297,
+        "bytes_archived": 17749208032156,
+        "bytes_written": 14142534835860
+      }
+    ],
+    "summary": {
+      "n_migrations": {
+        "mean": 4151.6,
+        "std": 1419.036574581501,
+        "ci_half": 1243.8403993824932
+      },
+      "n_mounts": {
+        "mean": 7.6,
+        "std": 0.5477225575051662,
+        "ci_half": 0.480099989585503
+      },
+      "mean_recall_latency_s": {
+        "mean": 2.7701046112450163,
+        "std": 0.041766977923480164,
+        "ci_half": 0.03661037032584079
+      },
+      "p95_recall_latency_s": {
+        "mean": 8.686975732266134,
+        "std": 0.21121892787353003
+      },
+      "p99_recall_latency_s": {
+        "mean": 16.699019136124768,
+        "std": 0.9113187367673987
+      },
+      "cache_hit_rate": {
+        "mean": 0.9998434656173544,
+        "std": 0.00014292540863825983
+      }
+    }
+  },
+  "adaptive": {
+    "raw_results": [
+      {
+        "rep_id": 0,
+        "n_migrations": 6917,
+        "n_recalls": 3758,
+        "n_mounts": 0,
+        "mean_recall_latency_s": 2.689382955962062,
+        "p95_recall_latency_s": 8.202319335422718,
+        "p99_recall_latency_s": 16.0869179012484,
+        "cache_hit_rate": 1.0,
+        "bytes_archived": 23227983074816,
+        "bytes_written": 14738160113045
+      },
+      {
+        "rep_id": 1,
+        "n_migrations": 6890,
+        "n_recalls": 3763,
+        "n_mounts": 0,
+        "mean_recall_latency_s": 2.7467401202980546,
+        "p95_recall_latency_s": 8.705606898121367,
+        "p99_recall_latency_s": 17.482178095538647,
+        "cache_hit_rate": 1.0,
+        "bytes_archived": 23152264292459,
+        "bytes_written": 14446389368853
+      },
+      {
+        "rep_id": 2,
+        "n_migrations": 7111,
+        "n_recalls": 3853,
+        "n_mounts": 0,
+        "mean_recall_latency_s": 2.785854200473866,
+        "p95_recall_latency_s": 8.43559917610837,
+        "p99_recall_latency_s": 17.240798455351324,
+        "cache_hit_rate": 0.9997405293201869,
+        "bytes_archived": 23077482500822,
+        "bytes_written": 14266356359245
+      },
+      {
+        "rep_id": 3,
+        "n_migrations": 6947,
+        "n_recalls": 3850,
+        "n_mounts": 0,
+        "mean_recall_latency_s": 2.6816095229200276,
+        "p95_recall_latency_s": 8.186157553068545,
+        "p99_recall_latency_s": 16.23794067486095,
+        "cache_hit_rate": 1.0,
+        "bytes_archived": 23246893147616,
+        "bytes_written": 14839265196365
+      },
+      {
+        "rep_id": 4,
+        "n_migrations": 6928,
+        "n_recalls": 3950,
+        "n_mounts": 0,
+        "mean_recall_latency_s": 2.7018852277123266,
+        "p95_recall_latency_s": 8.582473157704857,
+        "p99_recall_latency_s": 16.835671515860472,
+        "cache_hit_rate": 1.0,
+        "bytes_archived": 23291503658018,
+        "bytes_written": 14276834707092
+      }
+    ],
+    "summary": {
+      "n_migrations": {
+        "mean": 6958.6,
+        "std": 87.65443514164015,
+        "ci_half": 76.83249999837308
+      },
+      "n_mounts": {
+        "mean": 0.0,
+        "std": 0.0,
+        "ci_half": 0.0
+      },
+      "mean_recall_latency_s": {
+        "mean": 2.7210944054732673,
+        "std": 0.04411688516880512,
+        "ci_half": 0.038670154843656206
+      },
+      "p95_recall_latency_s": {
+        "mean": 8.422431224085173,
+        "std": 0.22926500441044856
+      },
+      "p99_recall_latency_s": {
+        "mean": 16.776701328571956,
+        "std": 0.6088155125735598
+      },
+      "cache_hit_rate": {
+        "mean": 0.9999481058640374,
+        "std": 0.00011603881564605005
+      }
+    }
+  }
+}

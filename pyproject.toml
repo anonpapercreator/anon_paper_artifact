@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "dmf7-des"
+version = "1.0.0"
+description = "Academically defensible discrete event simulator for HPE DMF 7 HSM"
+requires-python = ">=3.10"
+dependencies = [
+    "simpy>=4.1.1",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+    "pandas>=2.0.0",
+    "pyyaml>=6.0",
+    "jsonlines>=4.0.0",
+    "rich>=13.0.0",
+    "click>=8.1.0",
+]
+
+[project.scripts]
+dmf7-des = "main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["core*", "components*", "workload*", "stats*", "validation*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
