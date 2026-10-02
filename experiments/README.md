@@ -1,7 +1,7 @@
 # DESCASSI Experimental Protocol
 
-This directory contains reproducible experiments for the SC 2026 paper
-"A Principled Online Optimiser for Hierarchical Storage Management."
+This directory contains reproducible experiments for DESCASSI. E1 to E4 are simulator
+experiments; the lifetime study (E7 to E10) is described in `../LIFETIME_STUDY.md`.
 
 ## Quick Start
 

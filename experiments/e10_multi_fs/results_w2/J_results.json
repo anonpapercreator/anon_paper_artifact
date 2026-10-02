@@ -1,0 +1,106 @@
+{
+ "fs": "J",
+ "input_files": 37,
+ "records_in_files": 15780,
+ "duplicate_records_dropped_in_window": 0,
+ "lifecycles": 7802,
+ "status": {
+  "censored": 7802,
+  "death": 0,
+  "reuse": 0
+ },
+ "TB_written": 3.84395471797,
+ "empty_file_share": 0.011663675980517816,
+ "directory_trees": 1,
+ "prefix_missing_share": 0.0,
+ "peff_h": 6.250116959064328,
+ "top5_share_written": 1.0,
+ "top5_share_deleted": null,
+ "bytes": {
+  "C6": 1.0,
+  "V6_h": 3.5,
+  "C1": 1.0,
+  "V1_h": 1.0,
+  "Vratio_1h": 3.5,
+  "Cinc_1h_pct": 0.0,
+  "Vratio_15m": 5.6,
+  "Cinc_15m_pct": 0.0,
+  "Veff_h": 3.625058634380331,
+  "Ceff": 1.0,
+  "waste_28d": 0.0,
+  "S_30m": 1.0,
+  "S_6h": 1.0,
+  "S_1d": 1.0,
+  "S_7d": 1.0,
+  "S_28d": 1.0,
+  "bound_ratio": 3.5,
+  "waste_28d_earliest": 0.0,
+  "ci95": {
+   "Vratio_1h": [
+    3.5,
+    3.5
+   ],
+   "Cinc_1h_pct": [
+    0.0,
+    0.0
+   ],
+   "waste_28d": [
+    0.0,
+    0.0
+   ],
+   "S_28d": [
+    1.0,
+    1.0
+   ],
+   "V6_h": [
+    3.5,
+    3.5
+   ]
+  }
+ },
+ "count": {
+  "C6": 1.0,
+  "V6_h": 3.5,
+  "C1": 1.0,
+  "V1_h": 1.0,
+  "Vratio_1h": 3.5,
+  "Cinc_1h_pct": 0.0,
+  "Vratio_15m": 5.6,
+  "Cinc_15m_pct": 0.0,
+  "Veff_h": 3.625058634380331,
+  "Ceff": 1.0,
+  "waste_28d": 0.0,
+  "S_30m": 1.0,
+  "S_6h": 1.0,
+  "S_1d": 1.0,
+  "S_7d": 1.0,
+  "S_28d": 1.0,
+  "bound_ratio": 3.5,
+  "waste_28d_earliest": 0.0,
+  "ci95": {
+   "Vratio_1h": [
+    3.5,
+    3.5
+   ],
+   "Cinc_1h_pct": [
+    0.0,
+    0.0
+   ],
+   "waste_28d": [
+    0.0,
+    0.0
+   ],
+   "S_28d": [
+    1.0,
+    1.0
+   ],
+   "V6_h": [
+    3.5,
+    3.5
+   ]
+  }
+ },
+ "reps": 400,
+ "seed": 7,
+ "elapsed_s": 2.3
+}

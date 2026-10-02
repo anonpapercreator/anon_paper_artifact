@@ -1,0 +1,86 @@
+{
+ "A": {
+  "N": 5245883,
+  "N_nonempty": 4603668,
+  "pred_all": 4677487.898103861,
+  "pred_nonempty": 4126608.727102144,
+  "submitted": 4707802
+ },
+ "B": {
+  "N": 5517355,
+  "N_nonempty": 5060790,
+  "pred_all": 5135609.869642985,
+  "pred_nonempty": 4718919.462944353,
+  "submitted": 5184428
+ },
+ "C": {
+  "N": 9155332,
+  "N_nonempty": 7320638,
+  "pred_all": 8184383.926007198,
+  "pred_nonempty": 6947013.760034969,
+  "submitted": 7946495
+ },
+ "D": {
+  "N": 4241421,
+  "N_nonempty": 3492496,
+  "pred_all": 2437093.356941665,
+  "pred_nonempty": 2220027.2081094654,
+  "submitted": 2470727
+ },
+ "E": {
+  "N": 1373606,
+  "N_nonempty": 954639,
+  "pred_all": 1032472.6026050531,
+  "pred_nonempty": 891012.9768132059,
+  "submitted": 1167645
+ },
+ "F": {
+  "N": 1158440,
+  "N_nonempty": 1110372,
+  "pred_all": 738407.7749022156,
+  "pred_nonempty": 712241.7793026258,
+  "submitted": 758870
+ },
+ "G": {
+  "N": 2790847,
+  "N_nonempty": 1443766,
+  "pred_all": 1568109.691950905,
+  "pred_nonempty": 1364443.3342102882,
+  "submitted": 1620017
+ },
+ "H": {
+  "N": 1997022,
+  "N_nonempty": 1540931,
+  "pred_all": 1977294.2157640925,
+  "pred_nonempty": 1528939.5416640742,
+  "submitted": 2106429
+ },
+ "I": {
+  "N": 495562,
+  "N_nonempty": 464940,
+  "pred_all": 482907.1774448371,
+  "pred_nonempty": 454770.43658969924,
+  "submitted": 536513
+ },
+ "J": {
+  "N": 50679,
+  "N_nonempty": 50010,
+  "pred_all": 50664.433114216234,
+  "pred_nonempty": 49995.43311421681,
+  "submitted": 0
+ },
+ "K": {
+  "N": 2505842,
+  "N_nonempty": 2361047,
+  "pred_all": 2505834.999999996,
+  "pred_nonempty": 2361044.000000012,
+  "submitted": 2614060
+ },
+ "L": {
+  "N": 44,
+  "N_nonempty": 40,
+  "pred_all": 44.0,
+  "pred_nonempty": 40.0,
+  "submitted": 197
+ }
+}

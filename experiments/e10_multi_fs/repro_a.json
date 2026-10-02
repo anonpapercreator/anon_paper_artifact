@@ -1,0 +1,227 @@
+{
+ "tot": {
+  "orig": 12748929,
+  "new": 12898795,
+  "matched": 12748929
+ },
+ "bad_key_links": 0,
+ "bad_prefix_links": 0,
+ "n_keys": 4935698,
+ "n_prefixes": 319773,
+ "extra_n": 149866,
+ "extra_tmin": "2026-09-27 09:39:43 UTC",
+ "extra_tmax": "2026-09-30 11:30:04 UTC",
+ "extra_before_0927_0000Z": 0,
+ "perday": {
+  "20260828": {
+   "orig": 153511,
+   "new": 153511,
+   "matched": 153511,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260829": {
+   "orig": 81844,
+   "new": 81844,
+   "matched": 81844,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260830": {
+   "orig": 185986,
+   "new": 185986,
+   "matched": 185986,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260831": {
+   "orig": 542664,
+   "new": 542664,
+   "matched": 542664,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260901": {
+   "orig": 271044,
+   "new": 271044,
+   "matched": 271044,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260902": {
+   "orig": 216370,
+   "new": 216370,
+   "matched": 216370,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260903": {
+   "orig": 446879,
+   "new": 446879,
+   "matched": 446879,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260904": {
+   "orig": 1938583,
+   "new": 1938583,
+   "matched": 1938583,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260905": {
+   "orig": 58991,
+   "new": 58991,
+   "matched": 58991,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260906": {
+   "orig": 2758,
+   "new": 2758,
+   "matched": 2758,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260907": {
+   "orig": 717986,
+   "new": 717986,
+   "matched": 717986,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260908": {
+   "orig": 436954,
+   "new": 436954,
+   "matched": 436954,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260909": {
+   "orig": 108631,
+   "new": 108631,
+   "matched": 108631,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260910": {
+   "orig": 36134,
+   "new": 36134,
+   "matched": 36134,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260911": {
+   "orig": 160244,
+   "new": 160244,
+   "matched": 160244,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260912": {
+   "orig": 5125,
+   "new": 5125,
+   "matched": 5125,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260913": {
+   "orig": 34243,
+   "new": 34243,
+   "matched": 34243,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260914": {
+   "orig": 832146,
+   "new": 840741,
+   "matched": 832146,
+   "orig_unmatched": 0,
+   "extra": 8595
+  },
+  "20260915": {
+   "orig": 582696,
+   "new": 582696,
+   "matched": 582696,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260916": {
+   "orig": 1726971,
+   "new": 1729658,
+   "matched": 1726971,
+   "orig_unmatched": 0,
+   "extra": 2687
+  },
+  "20260917": {
+   "orig": 89648,
+   "new": 89648,
+   "matched": 89648,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260918": {
+   "orig": 127047,
+   "new": 127047,
+   "matched": 127047,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260919": {
+   "orig": 36822,
+   "new": 85688,
+   "matched": 36822,
+   "orig_unmatched": 0,
+   "extra": 48866
+  },
+  "20260920": {
+   "orig": 140652,
+   "new": 187736,
+   "matched": 140652,
+   "orig_unmatched": 0,
+   "extra": 47084
+  },
+  "20260921": {
+   "orig": 219016,
+   "new": 219016,
+   "matched": 219016,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260922": {
+   "orig": 618264,
+   "new": 621538,
+   "matched": 618264,
+   "orig_unmatched": 0,
+   "extra": 3274
+  },
+  "20260923": {
+   "orig": 286245,
+   "new": 308365,
+   "matched": 286245,
+   "orig_unmatched": 0,
+   "extra": 22120
+  },
+  "20260924": {
+   "orig": 978736,
+   "new": 978736,
+   "matched": 978736,
+   "orig_unmatched": 0,
+   "extra": 0
+  },
+  "20260925": {
+   "orig": 1314740,
+   "new": 1321354,
+   "matched": 1314740,
+   "orig_unmatched": 0,
+   "extra": 6614
+  },
+  "20260926": {
+   "orig": 397999,
+   "new": 408625,
+   "matched": 397999,
+   "orig_unmatched": 0,
+   "extra": 10626
+  }
+ }
+}

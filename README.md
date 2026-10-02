@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# des_2026
-=======
 # DESCASSI - Discrete Event Simulator for Combined Archival and Scratch Storage Infrastructure
 
 A scientifically rigorous Discrete Event Simulation (DES) of Hierarchical Storage
@@ -896,4 +893,5 @@ If you use this simulator in academic work, please cite:
 
 > Smirni, E. & Reed, D.A. (1998). Workload characterization of input/output
 > intensive parallel applications. *Proc. IFIP WG 7.3*. [LogNormal file size basis]
->>>>>>> b628b50 (Initial commit: DESCASSI HSM simulator)
+
+The lifetime study (model, file-lifetime measurement and policy log) is described in `LIFETIME_STUDY.md`.

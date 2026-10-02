@@ -14,3 +14,9 @@ Definitions
   T_hi uses the upper bound, T_lo the lower bound.
 - Otherwise right-censored at the window end. Bytes: maximum size seen at WCLOSE or UNLINK.
 - mtime is not used as a birth time: for window-born files it precedes CREATE by more than 37 days in over 25% of cases.
+
+Paper numbers and figures (file system A): `paper_numbers.py`, `headline_ci.py`, `waste_ci.py`
+(estimates and 95% intervals), `peff.py` (run duration added to the interval), `rule.py`, `rule2.py`
+(price ratio and age threshold), `policy.py` (`policy_frontier.csv`; fixed delay against periodic
+runs), `sweeps.py` (`sweep_p.csv`, `sweep_a.csv`), `surv_csv.py` (survival curves), `hazfig.py`
+(`hazard.csv`), `mtime_check.py` and `chk.py` (modification time against create records).

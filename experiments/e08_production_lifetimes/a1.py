@@ -1,9 +1,9 @@
 import pandas as pd, numpy as np
 df=pd.read_parquet('audit.parquet')
-AEST=10*3600
-df['day']=pd.to_datetime(df.t+AEST,unit='s').dt.date
-df['hr']=((df.t+AEST)//3600).astype(int)
-print("t range",pd.to_datetime(df.t.min()+AEST,unit='s'),pd.to_datetime(df.t.max()+AEST,unit='s'))
+LOCAL=0  # offset of local time from UTC, seconds
+df['day']=pd.to_datetime(df.t+LOCAL,unit='s').dt.date
+df['hr']=((df.t+LOCAL)//3600).astype(int)
+print("t range",pd.to_datetime(df.t.min()+LOCAL,unit='s'),pd.to_datetime(df.t.max()+LOCAL,unit='s'))
 tab=df.pivot_table(index='day',columns='ev',values='t',aggfunc='size',observed=True).fillna(0).astype(int)
 hrs=df.groupby('day').hr.nunique(); tab['hours_with_events']=hrs
 print(tab.to_string())
