@@ -39,18 +39,54 @@ from scipy import integrate, optimize
 @dataclass
 class Lifetime:
     """Mixture lifetime: fraction s_inf is never deleted (the retained class);
-    the remaining 1 - s_inf is exponential or lognormal with the given mean."""
+    the remaining 1 - s_inf is exponential or lognormal with the given mean.
+
+    kind="empirical" instead reads a survival curve S(t) from the CSV file `curve`
+    (columns age_s, S; uniform grid starting at 0 with S(0) = 1). S is taken as
+    linear between grid points and constant at its last value beyond the grid, so
+    s_inf is set to that last value. G, H and sampling are exact for this S."""
     s_inf: float = 1.0
     kind: str = "exp"
     mean_s: float = 3600.0
     sigma: float = 1.0          # lognormal shape (ignored for exp)
+    curve: str = ""             # CSV path for kind="empirical"
 
     def __post_init__(self):
+        if self.kind not in ("exp", "lognormal", "empirical"):
+            raise ValueError("kind must be 'exp', 'lognormal' or 'empirical'")
+        if self.kind == "empirical":
+            self._load_curve()
         if not 0.0 <= self.s_inf <= 1.0:
             raise ValueError("s_inf must lie in [0, 1]")
-        if self.kind not in ("exp", "lognormal"):
-            raise ValueError("kind must be 'exp' or 'lognormal'")
         self._mu = np.log(self.mean_s) - self.sigma ** 2 / 2.0
+
+    # empirical curve: S linear on [g_k, g_k + h], constant beyond the grid
+    def _load_curve(self):
+        import pandas as pd
+        d = pd.read_csv(self.curve)
+        g = d["age_s"].to_numpy(float); S = d["S"].to_numpy(float)
+        h = np.diff(g)
+        if g[0] != 0.0 or not np.allclose(h, h[0]) or abs(S[0] - 1.0) > 1e-9:
+            raise ValueError("curve must start at age 0 with S = 1 on a uniform grid")
+        if np.any(np.diff(S) > 1e-12):
+            raise ValueError("curve must be nonincreasing")
+        self._g, self._S, self._h = g, S, float(h[0])
+        self._m = np.diff(S) / self._h                      # slope on each segment
+        self._Gk = np.r_[0.0, np.cumsum(S[:-1] * self._h + self._m * self._h ** 2 / 2)]
+        self._Hk = np.r_[0.0, np.cumsum(self._Gk[:-1] * self._h + S[:-1] * self._h ** 2 / 2
+                                        + self._m * self._h ** 3 / 6)]
+        self.s_inf = float(S[-1])
+
+    def _seg(self, x):
+        x = np.asarray(x, dtype=float)
+        k = np.clip((x // self._h).astype(int), 0, len(self._g) - 2)
+        u = x - self._g[k]
+        return k, u
+
+    def _emp_S(self, x):
+        x = np.asarray(x, dtype=float)
+        k, u = self._seg(np.minimum(x, self._g[-1]))
+        return self._S[k] + self._m[k] * u
 
     # finite-part survival and density
     def _sf(self, t):
@@ -68,9 +104,15 @@ class Lifetime:
         return lognorm.pdf(t, s=self.sigma, scale=np.exp(self._mu))
 
     def S(self, t):
+        if self.kind == "empirical":
+            return self._emp_S(t)
         return self.s_inf + (1.0 - self.s_inf) * self._sf(t)
 
     def f(self, t):
+        if self.kind == "empirical":
+            t = np.asarray(t, dtype=float)
+            k, _ = self._seg(np.minimum(t, self._g[-1]))
+            return np.where(t < self._g[-1], -self._m[k], 0.0)
         return (1.0 - self.s_inf) * self._pdf(t)
 
     def hazard(self, t):
@@ -78,6 +120,11 @@ class Lifetime:
 
     def G(self, x: float) -> float:
         x = float(x)
+        if self.kind == "empirical":
+            if x >= self._g[-1]:
+                return float(self._Gk[-1] + self._S[-1] * (x - self._g[-1]))
+            k, u = self._seg(x); k = int(k); u = float(u)
+            return float(self._Gk[k] + self._S[k] * u + self._m[k] * u * u / 2)
         if self.kind == "exp":
             m = self.mean_s
             return self.s_inf * x + (1 - self.s_inf) * m * (-np.expm1(-x / m))
@@ -86,6 +133,13 @@ class Lifetime:
 
     def H(self, x: float) -> float:
         x = float(x)
+        if self.kind == "empirical":
+            if x >= self._g[-1]:
+                y = x - self._g[-1]
+                return float(self._Hk[-1] + self._Gk[-1] * y + self._S[-1] * y * y / 2)
+            k, u = self._seg(x); k = int(k); u = float(u)
+            return float(self._Hk[k] + self._Gk[k] * u + self._S[k] * u * u / 2
+                         + self._m[k] * u ** 3 / 6)
         if self.kind == "exp":
             m = self.mean_s
             return (self.s_inf * x * x / 2.0
@@ -105,6 +159,17 @@ class Lifetime:
                      * norm.cdf((np.log(x) - mu - k * s * s) / s))
 
     def sample(self, rng: np.random.Generator, n: int) -> np.ndarray:
+        if self.kind == "empirical":
+            # inverse transform: L = S^{-1}(U); U < s_inf means never deleted
+            U = rng.random(n)
+            L = np.full(n, np.inf)
+            fin = U >= self.s_inf
+            negS = -self._S
+            k = np.searchsorted(negS, -U[fin], side="left") - 1   # S[k] >= U > S[k+1]
+            k = np.clip(k, 0, len(self._g) - 2)
+            m = self._m[k]
+            L[fin] = self._g[k] + np.where(m < 0, (self._S[k] - U[fin]) / np.where(m < 0, -m, 1.0), 0.0)
+            return L
         L = np.full(n, np.inf)
         finite = rng.random(n) >= self.s_inf
         k = int(finite.sum())

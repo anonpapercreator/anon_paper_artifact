@@ -19,7 +19,7 @@ simulation:
 # Models the Lustre / HPE XFS filesystem disk layer
 # ---------------------------------------------------------------------------
 disk_cache:
-  capacity_bytes: 977465837092864    # 889 TiB real p4_ls scratch tier
+  capacity_bytes: 977465837092864    # 889 TiB real ls1 scratch tier
   hwm_fraction: 0.80              # Free-space TRIGGER high-water mark (independent of migration)
   lwm_fraction: 0.60              # Free-space trigger releases DUL->OFL down to here
   initial_fill_fraction: 0.50     # Starting fill level (fraction)
@@ -102,7 +102,7 @@ tape_robot:
 # ---------------------------------------------------------------------------
 tape_drives:
   n_drives: 9                          # Must match tape_robot.n_drives (9 usable)
-  drive_type: TS1160                   # IBM TS1160 in TS4500 (p4_ls)
+  drive_type: TS1160                   # IBM TS1160 in TS4500 (ls1)
   n_write_drives: 7                    # 9 drives serve recalls; 7 of them also serve writes
 
   # Transfer rates (bytes/s)
@@ -143,7 +143,7 @@ tape_drives:
 # DMF 7 organises tape volumes into Volume Groups (VGs)
 # ---------------------------------------------------------------------------
 volume_groups:
-  - name: p4_ls                        # Single TS4500/TS1160 library (p4_ls)
+  - name: ls1                        # Single TS4500/TS1160 library (ls1)
     n_volumes: 3040                    # Real cartridge count per library (TS1160 JE)
     drives_assigned: [0, 1, 2, 3, 4, 5, 6, 7, 8]  # all 9 drives serve this VG (read pool)
     volume_capacity_bytes: 20000000000000  # 20 TB native per cartridge

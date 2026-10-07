@@ -583,7 +583,7 @@ class LibraryServer:
         self._dual_copy = cfg.get("dual_copy", True)
         self._vg_names = list(vgs.keys())
 
-        # Drive pools (p4_ls topology): all drives serve recalls; a subset also
+        # Drive pools (ls1 topology): all drives serve recalls; a subset also
         # serves writes. n_write_drives defaults to all drives when unset.
         n_all = len(drives)
         n_write = max(1, min(int(cfg.get("n_write_drives", n_all)), n_all))

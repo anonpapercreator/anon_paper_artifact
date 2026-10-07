@@ -1,7 +1,7 @@
 #!/bin/bash
-# extract_msp.sh -- reduce DMF MSP logs (p4_ls) to the records needed for the
+# extract_msp.sh -- reduce DMF MSP logs (ls1) to the records needed for the
 # archived-file lifetime study. Run in the MSP spool directory, e.g.
-#   cd <spool>/p4_ls && bash extract_msp.sh 20260704 20260927 ~/msp_extract
+#   cd <spool>/ls1 && bash extract_msp.sh 20260704 20260927 ~/msp_extract
 # Keeps: chunk adds (tape copy written, incl. merge copies), zone update/complete
 # markers (to pair merge copies), hard-delete chunk removals, merge removals, and
 # the daemon's cumulative Put/Delete/Merge counters. Drops host and pid fields.

@@ -3,8 +3,8 @@ MSP Log Parser
 ==============
 Parses DMF Managed Storage Proxy (MSP) logs into normalized trace format.
 
-Log Format (from p4_ls system):
-- msplog.YYYYMMDD files in /p4_ls directory
+Log Format (from ls1 system):
+- msplog.YYYYMMDD files in /ls1 directory
 - Events: Put_File (migration), Get_File (recall)
 - Example: Req=7486238,18940a9734e9371e,Put_File,key=0abf..., good Put_File - size 380011541.
 
@@ -28,7 +28,7 @@ class MSPLogParser:
     """
     Parses MSP (Managed Storage Proxy) logs into normalized trace format.
     
-    Input: msplog.YYYYMMDD files from /p4_ls directory
+    Input: msplog.YYYYMMDD files from /ls1 directory
     Output: Normalized events for simulation replay
     """
     

@@ -654,7 +654,8 @@ class Filesystem:
             self._lifetime = Lifetime(s_inf=float(lt.get("s_inf", 1.0)),
                                       kind=str(lt.get("kind", "exp")),
                                       mean_s=float(lt.get("mean_s", 3600.0)),
-                                      sigma=float(lt.get("sigma", 1.0)))
+                                      sigma=float(lt.get("sigma", 1.0)),
+                                      curve=str(lt.get("curve", "")))
             self._rng_life = rng.extra("file_lifetime")
 
     def handle_write(self, file_rec: FileRecord) -> Iterator:
